@@ -6,14 +6,35 @@
 </head>
 <body>
 
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+  <div class="cuckoo">
+    <div class="base">
+      <div class="face">
+        
+          <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+          </div>
+        
       </div>
     </div>
+    <div class="roof">
+      <div class="opening-top"></div>
+      <div class="opening-bottom">
+        <div class="bird-body">
+          <div class="eyeL"></div>
+          <div class="eyeR"></div>
+          <div class="beak"></div>
+        </div>
+      </div>
+      <div class="door">
+        <div class="door-top"></div>
+        <div class="door-bottom"></div>
+      </div>
+    </div>
+  </div>
+
+
 
 
   <style>
@@ -68,12 +89,123 @@
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
+/*start of my clock*/
+    .cuckoo{
+  width: 60rem;
+  height: 60rem;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+.base{
+  width: 60%;
+  height: 60%;
+  background-color: #72452A;
+  position: relative;
+  left: 20%;
+  top: 40%;
+}
+
+.roof{
+  width: 0;
+	height: 0;
+	border-style: solid;
+  border-width: 0 30rem 30rem 30rem;
+  border-color: transparent transparent #72452A transparent;
+  position: relative;
+  left: 0%;
+  top: -60%;
+}
+
+.face{
+  width: 50%;
+  height: 50%;
+  background: white;
+  position: absolute;
+  border-radius: 50%;
+  top: 30%;
+  left: 25%;
+}
+.opening-bottom, .door-bottom{
+  width: 10rem;
+  height: 10rem;
+  background: black;
+  position: absolute;
+  left: -4rem;
+  top: 20rem;
+}
+.opening-top, .door-top{
+  width: 10rem;
+  height: 10rem;
+  background: black;
+  position: absolute;
+  border-radius: 50%;
+  top: 15rem;
+  left: -4rem;
+}
+
+.bird-body{
+  width: 8rem;
+  height: 6rem;
+  background: #bf80ff;
+  position: absolute;
+  border-radius: 50%;
+  top: 2rem;
+  left: 1rem;
+}
+
+.eyeL{
+  width: 6px;
+  height: 6px;
+  background: black;
+  position: absolute;
+  border-radius: 50%;
+  top: 2rem;
+  left: 2rem;
+}
+
+.eyeR{
+  width: 6px;
+  height: 6px;
+  background: black;
+  position: absolute;
+  border-radius: 50%;
+  top: 2rem;
+  left: 6rem;
+}
+
+.beak{
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 20px 20px 0 20px;
+border-color: #ffbf00 transparent transparent transparent;
+position: absolute;
+  top: 3rem;
+  left: 3rem;
+}
+
+.door-top, .door-bottom{
+  background-color: #967F6D;
+}
+
+.door{
+  transform-origin: 100%;
+  transform: translateX(0px);
+  transition: all 0.1s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+  
+}
+  
+
   </style>
 
   <script>
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
+    const door = document.querySelector('.door')
     function setDate(){
       const now = new Date();
       const seconds = now.getSeconds();
