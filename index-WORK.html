@@ -90,7 +90,7 @@
     }
 
 /*start of my clock*/
-    .cuckoo{
+.cuckoo{
   width: 60rem;
   height: 60rem;
   position: relative;
@@ -193,11 +193,12 @@ position: absolute;
 .door{
   transform-origin: 100%;
   transform: translateX(0px);
-  transition: all 0.1s;
-  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
-  
+  animation:move 2s infinite ease; 
 }
   
+@keyframes move {
+  50% {transform:translateX(0px);}  
+}
 
   </style>
 
@@ -205,7 +206,7 @@ position: absolute;
     const secondHand = document.querySelector('.second-hand');
     const minuteHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
-    const door = document.querySelector('.door')
+    const door = document.querySelector('.door');
     function setDate(){
       const now = new Date();
       const seconds = now.getSeconds();
@@ -219,10 +220,33 @@ position: absolute;
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
       minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
       hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
-      console.log(hours);
+      
     }
+    function open(){
+        door.style.transform = `translateX(${100}px)`;
+        console.log("help");
+    }
+    function stop(){
+      door.style.transform = `translateX(${0}px)`;
+    }
+    function check(){
+      const now = new Date();
+      const minutes = now.getMinutes();
+      var hours = now.getHours();
+      const seconds = now.getSeconds();
+      if (hours > 12){
+        hours -= 12;
+      }
+      n = 0;
+      if (minutes == 0 && seconds == 0){
+        console.log("s");
+        open();
+        setTimeout(stop, 1500 * hours);
+      }
+    } 
 
-    setInterval(setDate, 1000)
+    setInterval(setDate, 1000);
+    setInterval(check, 1000);
   </script>
 </body>
 </html>
