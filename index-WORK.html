@@ -19,6 +19,8 @@
       </div>
     </div>
     <div class="roof">
+      <div class="roof-decor-left"></div>
+      <div class="roof-decor-right"></div>
       <div class="opening-top"></div>
       <div class="opening-bottom">
         <div class="bird-body">
@@ -39,7 +41,7 @@
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: #018DED url(https://source.unsplash.com/QpSNGIQlAdI/1000?image=881&blur=5);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -85,7 +87,7 @@
       top: 50%;
       transform-origin: 100%;
       transform: rotate(90deg);
-      transition: all 0.05s;
+      /* transition: all 0.05s; */
       transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
 
@@ -99,8 +101,8 @@
 } 
 
 .base{
-  width: 60%;
-  height: 60%;
+  width: 36rem;
+  height: 36rem;
   background-color: #72452A;
   position: relative;
   left: 20%;
@@ -111,11 +113,28 @@
   width: 0;
 	height: 0;
 	border-style: solid;
-  border-width: 0 30rem 30rem 30rem;
+  border-width: 0 18rem 18rem 18rem;
   border-color: transparent transparent #72452A transparent;
   position: relative;
-  left: 0%;
-  top: -60%;
+  left: 20%;
+  top: -50%;
+}
+
+.roof-decor-left, .roof-decor-right{
+  background-color:  #492813;
+  position: relative; 
+  height: 5rem; 
+  width: 36rem; 
+  transform-origin: 100%;
+  transform: rotate(135deg);
+  left: -60rem;
+  top: 20rem;
+}
+
+.roof-decor-left{
+  transform: rotate(225deg);
+  left: -38rem;
+  top: -1rem;
 }
 
 .face{
@@ -127,22 +146,42 @@
   top: 30%;
   left: 25%;
 }
-.opening-bottom, .door-bottom{
+.opening-bottom {
   width: 10rem;
   height: 10rem;
   background: black;
   position: absolute;
-  left: -4rem;
-  top: 20rem;
+  left: -5rem;
+  top: 17rem;
 }
-.opening-top, .door-top{
+
+.door-bottom{
+  width: 10rem;
+  height: 10rem;
+  background: black;
+  position: absolute;
+  left: -5rem;
+  top: 7rem;
+}
+
+.opening-top{
   width: 10rem;
   height: 10rem;
   background: black;
   position: absolute;
   border-radius: 50%;
-  top: 15rem;
-  left: -4rem;
+  top: 12rem;
+  left: -5rem;
+}
+
+.door-top{
+  width: 10rem;
+  height: 10rem;
+  background: black;
+  position: absolute;
+  border-radius: 50%;
+  top: 2rem;
+  left: -5rem;
 }
 
 .bird-body{
@@ -192,7 +231,7 @@ position: absolute;
 
 .door{
   transform-origin: 100%;
-  transform: translateX(0px);
+  transform: translateX(0px); 
   animation:move 2s infinite ease; 
 }
   
@@ -207,16 +246,30 @@ position: absolute;
     const minuteHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
     const door = document.querySelector('.door');
+    const hand = document.querySelector('.hand');
+
+    // var secondsDegrees = 90;
+    // var minutesDegrees = 90;
+    // var hoursDegrees = 90;
+
     function setDate(){
       const now = new Date();
       const seconds = now.getSeconds();
       const minutes = now.getMinutes();
       const hours = now.getHours();
       
-      const secondsDegrees = ((seconds / 60) * 360) + 90;
-      const minutesDegrees = ((minutes / 60) * 360) + 90;
-      const hoursDegrees = ((hours / 12) * 360) + 90;
-      
+      secondsDegrees = ((seconds / 60) * 360) + 90;
+      var minutesDegrees = ((minutes / 60) * 360) + 90;
+      var hoursDegrees = ((hours / 12) * 360) + 90;
+
+      if (seconds == 0 || seconds == 60){
+        minuteHand.style.transition = 'all 0s';
+        //minuteHand.style.transition = ` `;
+        console.log("help");
+      }  
+      if (minutes == 0){
+        hourHand.style.transform = `translate`; //???
+      }    
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
       minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
       hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
@@ -224,7 +277,6 @@ position: absolute;
     }
     function open(){
         door.style.transform = `translateX(${100}px)`;
-        console.log("help");
     }
     function stop(){
       door.style.transform = `translateX(${0}px)`;
@@ -241,12 +293,13 @@ position: absolute;
       if (minutes == 0 && seconds == 0){
         console.log("s");
         open();
-        setTimeout(stop, 1500 * hours);
+        setTimeout(stop, 1999 * hours);
       }
     } 
 
     setInterval(setDate, 1000);
-    setInterval(check, 1000);
+    setInterval(check, 1001);
+    hand.style.transition = 'shit';
   </script>
 </body>
 </html>
